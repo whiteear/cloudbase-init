@@ -165,6 +165,11 @@ class UserDataPlugin(base.BasePlugin):
             user_data_plugins = factory.load_plugins()
             cloud_config_plugin = user_data_plugins.get('text/cloud-config')
             ret_val = cloud_config_plugin.process_non_multipart(user_data)
+        elif user_data.startswith(b'#cloud-skyform'):
+            # skyform user data extention
+            user_data_plugins = factory.load_plugins()
+            skyform_config_plugin = user_data_plugins.get('text/skyform-config')
+            ret_val = skyform_config_plugin.process_non_multipart(user_data)
         else:
             ret_val = userdatautils.execute_user_data_script(user_data)
 
