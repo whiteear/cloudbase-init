@@ -48,6 +48,7 @@ class SkyformConfigPlugin(base.BaseUserDataPlugin):
         import os, ConfigParser, json
         init_path = os.getenv('CLOUDINIT_PATH') or CONF.skyform_metadata_path
         try:
+            part = part[len('#cloud-skyform'):]
             data = json.loads(part)
             config = ConfigParser.ConfigParser()
             config.add_section('DEFAULT')
