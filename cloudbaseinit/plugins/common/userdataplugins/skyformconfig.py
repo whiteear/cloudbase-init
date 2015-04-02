@@ -51,7 +51,7 @@ class SkyformConfigPlugin(base.BaseUserDataPlugin):
             config = ConfigParser.ConfigParser()
             config.add_section('metadata')
             for k,v in data.iteritems():
-                config.set(k, v)
+                config.set('metadata', k, v)
 
             with open(init_path, 'wb') as configfile:
                 config.write(configfile)
