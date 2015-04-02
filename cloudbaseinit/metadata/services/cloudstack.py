@@ -31,7 +31,7 @@ CONF.register_opts(OPTS)
 
 class CloudStack(base.BaseMetadataService):
 
-    URI_TEMPLATE = 'http://%s/latest/meta-data/'
+    URI_TEMPLATE = 'http://%s/latest/user-data/'
 
     def __init__(self):
         super(CloudStack, self).__init__()
@@ -105,7 +105,7 @@ class CloudStack(base.BaseMetadataService):
 
     def get_user_data(self):
         """User data for this virtual machine."""
-        return self._get_cache_data('../user-data')
+        return self._get_cache_data('user-data')
 
     def get_public_keys(self):
         """Available ssh public keys."""

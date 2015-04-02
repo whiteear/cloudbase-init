@@ -28,9 +28,7 @@ OPTS = [
     cfg.StrOpt(
         'skyfrom_metadata_path',
         default='C:/cloudinit/metadata',
-        help=(
-            'The skyform metadata file location'
-        ),
+        help='The skyform metadata file location'
     )
 ]
 CONF = cfg.CONF
@@ -51,13 +49,14 @@ class SkyformConfigPlugin(base.BaseUserDataPlugin):
             part = part[len('#cloud-skyform'):]
             data = json.loads(part)
             config = ConfigParser.ConfigParser()
-            config.add_section('DEFAULT')
-            for k,v in data:
+            config.add_section('metadata')
+            for k,v in data.iteritems():
                 config.set(k, v)
 
             with open(init_path, 'wb') as configfile:
                 config.write(configfile)
 
+            return base.PLUGIN_EXECUTE_ON_NEXT_BOOT
         except Exception,e :
             LOG.debug('failed to generate the metadata file. due to %s' % e)
                 
