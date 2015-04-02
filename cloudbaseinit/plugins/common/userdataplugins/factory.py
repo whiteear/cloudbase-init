@@ -24,6 +24,8 @@ opts = [
             'PartHandlerPlugin',
             'cloudbaseinit.plugins.common.userdataplugins.cloudconfig.'
             'CloudConfigPlugin',
+            'cloudbaseinit.plugins.common.userdataplugins.skyformconfig.'
+            'SkyformConfigPlugin',
             'cloudbaseinit.plugins.common.userdataplugins.cloudboothook.'
             'CloudBootHookPlugin',
             'cloudbaseinit.plugins.common.userdataplugins.shellscript.'
