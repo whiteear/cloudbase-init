@@ -17,7 +17,35 @@ import os
 from cloudbaseinit.osutils import base
 
 
-class PosixUtil(base.BaseOSUtils):
+class PosixUtils(base.BaseOSUtils):
 
     def reboot(self):
         os.system('reboot')
+
+    def get_dhcp_hosts_in_use(self):
+        dhclientFile = '/var/lib/dhclient/dhclient-eth0.leases'
+        dhfp = file(dhclientFile)
+        content = dhfp.read()
+        lineList = content.split('\n')
+        dhfp.close()
+
+        dhcpServer = []
+        for line in lineList:
+            if 'dhcp-server-identifier' in line:
+                dhcpServer.append(line.strip().split(' '))
+
+        if not dhcpServer:
+            return None
+
+        dhcpServer = dhcpServer[len(dhcpServer)-1][2][:-1]
+        return [('', dhcpServer)]
+
+    def set_config_value(self, name, value, section=None):
+        pass
+
+    def get_config_value(self, name, section=None):
+        """
+        PLUGIN_EXECUTION_DONE = 1
+        PLUGIN_EXECUTE_ON_NEXT_BOOT = 2
+        """ 
+        return 2

@@ -31,7 +31,7 @@ CONF.register_opts(OPTS)
 
 class CloudStack(base.BaseMetadataService):
 
-    URI_TEMPLATE = 'http://%s/latest/user-data/'
+    URI_TEMPLATE = 'http://%s/latest/user-data'
 
     def __init__(self):
         super(CloudStack, self).__init__()
